@@ -51,6 +51,9 @@
             "development": { "buildTarget": "the-crown-app:build:development" }
           },
           "defaultConfiguration": "development"
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
