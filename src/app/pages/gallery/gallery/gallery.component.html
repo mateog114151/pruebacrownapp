@@ -1,0 +1,15 @@
+<div class="loading" *ngIf="loading">Cargando...</div>
+<div class="gallery-page" *ngIf="!loading">
+  <h2>Galería</h2>
+  <div class="type-filter">
+    <button *ngFor="let t of types" [class.active]="t === selectedType" (click)="selectedType = t">
+      {{ t | titlecase }}
+    </button>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item" *ngFor="let img of filteredImages">
+      <img [src]="img.resolutions.original.url" [alt]="img.type" />
+      <span class="gallery-item__type">{{ img.type | titlecase }}</span>
+    </div>
+  </div>
+</div>

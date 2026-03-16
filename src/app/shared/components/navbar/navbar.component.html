@@ -1,0 +1,10 @@
+<nav class="navbar">
+  <a routerLink="/" class="navbar__brand">👑 The Crown</a>
+  <ul class="navbar__links" [class.open]="menuOpen">
+    <li><a routerLink="/"         routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Inicio</a></li>
+    <li><a routerLink="/episodes" routerLinkActive="active">Episodios</a></li>
+    <li><a routerLink="/cast"     routerLinkActive="active">Elenco</a></li>
+    <li><a routerLink="/gallery"  routerLinkActive="active">Galería</a></li>
+  </ul>
+  <button class="navbar__toggle" (click)="menuOpen = !menuOpen">☰</button>
+</nav>

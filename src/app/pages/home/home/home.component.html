@@ -1,0 +1,14 @@
+<div class="loading" *ngIf="loading">Cargando...</div>
+<section class="hero" *ngIf="show">
+  <div class="hero__bg" [style.backgroundImage]="'url(' + show.image?.original + ')'"></div>
+  <div class="hero__content">
+    <h1>{{ show.name }}</h1>
+    <p class="hero__meta">{{ show.status }} · {{ show.premiered | date:'yyyy' }} · {{ show.language }}</p>
+    <div class="hero__genres">
+      <span class="badge" *ngFor="let genre of show.genres">{{ genre }}</span>
+    </div>
+    <p class="hero__summary" [innerHTML]="show.summary"></p>
+    <p class="hero__rating">⭐ {{ show.rating.average }} / 10</p>
+    <p class="hero__network">📺 {{ show.network?.name }}</p>
+  </div>
+</section>

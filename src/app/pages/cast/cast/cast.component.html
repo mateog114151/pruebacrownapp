@@ -1,0 +1,14 @@
+<div class="loading" *ngIf="loading">Cargando...</div>
+<div class="cast-page" *ngIf="!loading">
+  <h2>Elenco</h2>
+  <div class="cast-grid">
+    <div class="cast-card" *ngFor="let member of cast">
+      <img [src]="member.person.image?.medium || 'https://via.placeholder.com/200x250?text=Sin+foto'" [alt]="member.person.name" />
+      <div class="cast-card__body">
+        <h3>{{ member.person.name }}</h3>
+        <p class="cast-card__character">como <em>{{ member.character.name }}</em></p>
+        <p *ngIf="member.person.birthday">🎂 {{ member.person.birthday | date:'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

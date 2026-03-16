@@ -1,0 +1,48 @@
+.loading { color: #c9a84c; text-align: center; padding: 4rem; font-size: 1.5rem; }
+
+.episodes-page {
+  padding: 2rem;
+  h2 { color: #c9a84c; font-size: 2rem; margin-bottom: 1.5rem; }
+}
+
+.season-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+
+  button {
+    background: none;
+    border: 1px solid #c9a84c;
+    color: #c9a84c;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    &.active, &:hover { background-color: #c9a84c; color: #000; }
+  }
+}
+
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.episode-card {
+  background-color: #1a1a2e;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s;
+  &:hover { transform: translateY(-5px); }
+
+  img { width: 100%; height: 140px; object-fit: cover; }
+
+  &__body {
+    padding: 1rem;
+    h3 { font-size: 0.95rem; color: #fff; margin: 0.3rem 0; }
+    p { color: #aaa; font-size: 0.85rem; margin: 0.2rem 0; }
+  }
+
+  &__num { color: #c9a84c; font-size: 0.8rem; font-weight: bold; }
+}

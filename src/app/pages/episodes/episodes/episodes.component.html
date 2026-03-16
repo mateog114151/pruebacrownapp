@@ -1,0 +1,20 @@
+<div class="loading" *ngIf="loading">Cargando...</div>
+<div class="episodes-page" *ngIf="!loading">
+  <h2>Episodios</h2>
+  <div class="season-filter">
+    <button *ngFor="let s of seasons" [class.active]="s === selectedSeason" (click)="selectedSeason = s">
+      Temporada {{ s }}
+    </button>
+  </div>
+  <div class="episodes-grid">
+    <div class="episode-card" *ngFor="let ep of filteredEpisodes">
+      <img [src]="ep.image?.medium || 'https://via.placeholder.com/250x140?text=Sin+imagen'" [alt]="ep.name" />
+      <div class="episode-card__body">
+        <span class="episode-card__num">S{{ ep.season }}E{{ ep.number }}</span>
+        <h3>{{ ep.name }}</h3>
+        <p>{{ ep.airdate | date:'dd/MM/yyyy' }}</p>
+        <p *ngIf="ep.rating?.average">⭐ {{ ep.rating.average }}</p>
+      </div>
+    </div>
+  </div>
+</div>
