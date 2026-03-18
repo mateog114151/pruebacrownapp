@@ -11,7 +11,7 @@ import { ShowImage } from '../../../models/image.model';
 export class GalleryComponent implements OnInit {
   images: ShowImage[] = [];
   selectedType = 'all';
-  types = ['all', 'poster', 'banner', 'background', 'typography'];
+  types = ['all', 'poster', 'banner', 'background'];
   loading = true;
 
   constructor(private tvmaze: TvmazeService) {}
