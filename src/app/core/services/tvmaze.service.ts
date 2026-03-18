@@ -28,4 +28,8 @@ export class TvmazeService {
   getImages(): Observable<ShowImage[]> {
     return this.http.get<ShowImage[]>(`${this.base}/shows/${this.id}/images`);
   }
+
+  getEpisodeWithCast(episodeId: number): Observable<any> {
+    return this.http.get<any>(`${this.base}/episodes/${episodeId}?embed[]=cast`);
+  }
 }

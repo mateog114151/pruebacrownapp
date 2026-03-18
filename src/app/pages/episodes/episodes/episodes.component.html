@@ -25,6 +25,7 @@
   <div class="modal" role="dialog" aria-modal="true">
     <button class="modal__close" (click)="closeModal($event)" aria-label="Cerrar">✕</button>
 
+    <!-- Hero imagen -->
     <div class="modal__hero">
       <img
         [src]="selectedEpisode.image?.original || selectedEpisode.image?.medium || 'https://via.placeholder.com/800x450?text=Sin+imagen'"
@@ -37,9 +38,11 @@
       </div>
     </div>
 
+    <!-- Cuerpo -->
     <div class="modal__body">
       <h2 class="modal__title">{{ selectedEpisode.name }}</h2>
 
+      <!-- Metadatos -->
       <div class="modal__meta">
         <span class="modal__meta-item" *ngIf="selectedEpisode.airdate">
           <span class="modal__meta-icon">📅</span>
@@ -55,9 +58,41 @@
         </span>
       </div>
 
+      <!-- Sinopsis -->
       <div class="modal__summary" *ngIf="selectedEpisode.summary" [innerHTML]="selectedEpisode.summary"></div>
       <div class="modal__summary modal__summary--empty" *ngIf="!selectedEpisode.summary">
         No hay sinopsis disponible para este episodio.
+      </div>
+
+      <!-- Elenco del episodio -->
+      <div class="modal__cast">
+        <h3 class="modal__cast-title">Elenco del episodio</h3>
+
+        <!-- Cargando -->
+        <div class="modal__cast-loading" *ngIf="castLoading">
+          <span class="modal__cast-spinner"></span>
+          Cargando elenco...
+        </div>
+
+        <!-- Sin datos -->
+        <p class="modal__cast-empty" *ngIf="!castLoading && episodeCast.length === 0">
+          No hay información de elenco disponible para este episodio.
+        </p>
+
+        <!-- Lista de actores -->
+        <div class="modal__cast-grid" *ngIf="!castLoading && episodeCast.length > 0">
+          <div class="cast-chip" *ngFor="let member of episodeCast">
+            <img
+              class="cast-chip__avatar"
+              [src]="member.person.image?.medium || 'https://via.placeholder.com/60x60?text=?'"
+              [alt]="member.person.name"
+            />
+            <div class="cast-chip__info">
+              <span class="cast-chip__actor">{{ member.person.name }}</span>
+              <span class="cast-chip__character">{{ member.character.name }}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
