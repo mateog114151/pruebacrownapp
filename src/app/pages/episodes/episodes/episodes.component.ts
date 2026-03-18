@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { TvmazeService } from '../../../core/services/tvmaze.service';
 import { Episode } from '../../../models/episode.model';
 
@@ -13,6 +13,7 @@ export class EpisodesComponent implements OnInit {
   seasons: number[] = [];
   selectedSeason = 1;
   loading = true;
+  selectedEpisode: Episode | null = null;
 
   constructor(private tvmaze: TvmazeService) {}
 
@@ -29,5 +30,27 @@ export class EpisodesComponent implements OnInit {
 
   get filteredEpisodes(): Episode[] {
     return this.episodes.filter(e => e.season === this.selectedSeason);
+  }
+
+  openModal(episode: Episode): void {
+    this.selectedEpisode = episode;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeModal(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    // Close when clicking the overlay or the close button
+    if (target.classList.contains('modal-overlay') || target.classList.contains('modal__close')) {
+      this.selectedEpisode = null;
+      document.body.style.overflow = '';
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscKey(): void {
+    if (this.selectedEpisode) {
+      this.selectedEpisode = null;
+      document.body.style.overflow = '';
+    }
   }
 }

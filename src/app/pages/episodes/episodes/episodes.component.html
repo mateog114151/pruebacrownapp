@@ -7,13 +7,57 @@
     </button>
   </div>
   <div class="episodes-grid">
-    <div class="episode-card" *ngFor="let ep of filteredEpisodes">
+    <div class="episode-card" *ngFor="let ep of filteredEpisodes" (click)="openModal(ep)">
       <img [src]="ep.image?.medium || 'https://via.placeholder.com/250x140?text=Sin+imagen'" [alt]="ep.name" />
       <div class="episode-card__body">
         <span class="episode-card__num">S{{ ep.season }}E{{ ep.number }}</span>
         <h3>{{ ep.name }}</h3>
         <p>{{ ep.airdate | date:'dd/MM/yyyy' }}</p>
         <p *ngIf="ep.rating?.average">⭐ {{ ep.rating.average }}</p>
+      </div>
+      <div class="episode-card__hover-hint">Ver detalles</div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="selectedEpisode" (click)="closeModal($event)">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal__close" (click)="closeModal($event)" aria-label="Cerrar">✕</button>
+
+    <div class="modal__hero">
+      <img
+        [src]="selectedEpisode.image?.original || selectedEpisode.image?.medium || 'https://via.placeholder.com/800x450?text=Sin+imagen'"
+        [alt]="selectedEpisode.name"
+        class="modal__hero-img"
+      />
+      <div class="modal__hero-overlay"></div>
+      <div class="modal__badge">
+        S{{ selectedEpisode.season | number:'2.0-0' }} · E{{ selectedEpisode.number | number:'2.0-0' }}
+      </div>
+    </div>
+
+    <div class="modal__body">
+      <h2 class="modal__title">{{ selectedEpisode.name }}</h2>
+
+      <div class="modal__meta">
+        <span class="modal__meta-item" *ngIf="selectedEpisode.airdate">
+          <span class="modal__meta-icon">📅</span>
+          {{ selectedEpisode.airdate | date:'dd MMMM yyyy' }}
+        </span>
+        <span class="modal__meta-item" *ngIf="selectedEpisode.rating?.average">
+          <span class="modal__meta-icon">⭐</span>
+          {{ selectedEpisode.rating.average }} / 10
+        </span>
+        <span class="modal__meta-item">
+          <span class="modal__meta-icon">🎬</span>
+          Temporada {{ selectedEpisode.season }}, Episodio {{ selectedEpisode.number }}
+        </span>
+      </div>
+
+      <div class="modal__summary" *ngIf="selectedEpisode.summary" [innerHTML]="selectedEpisode.summary"></div>
+      <div class="modal__summary modal__summary--empty" *ngIf="!selectedEpisode.summary">
+        No hay sinopsis disponible para este episodio.
       </div>
     </div>
   </div>
